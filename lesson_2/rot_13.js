@@ -1,41 +1,31 @@
-let lowerCaseLetters = []
-let upperCaseLetters = []
+let smallLetters = [];
+let capitalLetters = [];
 
-for(let i = 97; i <= 122; i += 1) {
-  lowerCaseLetters.push(String.fromCharCode(i));
+const startLowerCode = 97;
+const endLowerCode = 122;
+
+const startUpperCode = 65;
+const endUpperCode = 90;
+
+for(let ascii = startLowerCode; ascii <= endLowerCode; ascii += 1) {
+  smallLetters.push(String.fromCharCode(ascii));
 }
 
-for(let i = 65; i <= 90; i += 1) {
-  upperCaseLetters.push(String.fromCharCode(i));
-}
-
-function transformIndex(index) {
-  if (index > 25) {
-    return index % 13;
-  } else {
-    return index;
-  }
+for(let ascii = startUpperCode; ascii <= endUpperCode; ascii += 1) {
+  capitalLetters.push(String.fromCharCode(ascii));
 }
 
 function rot13(string) {
-  let index;
-  let new_letters = string.split('').map(letter => {
-                      if (lowerCaseLetters.includes(letter)) {
-                        index = lowerCaseLetters.indexOf(letter) + 13;
-                        index = transformIndex(index);
-                        return lowerCaseLetters[index];
-                      } else if (upperCaseLetters.includes(letter)) {
-                        index = upperCaseLetters.indexOf(letter) + 13;
-                        index = transformIndex(index);
-                        return upperCaseLetters[index];
-                      } else {
+  let newLetters = string.split('').map(letter => {
+                      let index = smallLetters.indexOf(letter.toLowerCase());
+                      if (index === -1) {
                         return letter;
+                      } else if (smallLetters[index] === letter) {
+                        return smallLetters[(index + 13) % 26];
+                      } else {
+                        return capitalLetters[(index + 13) % 26];
                       }
                     });
 
-  return new_letters.join('');
+  return newLetters.join('');
 }
-
-console.log(rot13(rot13('Teachers open the door, but you must enter by yourself.')));
-
-// Logs : Teachers open the door, but you must enter by yourself.

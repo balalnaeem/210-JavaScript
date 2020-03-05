@@ -1,7 +1,6 @@
-function doubler(number) {
-  console.log(number);
+let counter = 1;
 
-  if (number <= 50) {
-    doubler(number * 2);
-  }
+while (counter <= 10) {
+  console.log(counter);
+  counter += 1;
 }
