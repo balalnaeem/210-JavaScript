@@ -1,11 +1,10 @@
-function arrayToString(arr) {
-  let string = ''
-  let i;
-  for(i = 0; i < arr.length; i += 1) {
-    string += String(arr[i]);
-  }
+/*
+Input: 2 values (arr, val)
+Output: number (new array length)
 
-  return string;
-}
+Rules:
+- append the second argument to the end of the array
+- return the new length of the array
 
-console.log(arrayToString([1, 2, 3]));
+AL:
+- simply use length as the argument and [] operator can assign the given value to the end
